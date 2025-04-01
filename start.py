@@ -1,32 +1,21 @@
-from First_game import play_game as play_first_game
-from Second_game import play_game as play_second_game
-
-
-def choose_game():
-    print("Please choose a game:")
-    print("1. Find the Least Common Multiple of 3 numbers")
-    print("2. Find the missing number in the progression")
-    choice = input("Enter 1 or 2: ")
-
-    while choice not in ('1', '2'):
-        choice = input("Invalid choice. Please enter 1 or 2: ")
-
-    return int(choice)
-
-
-def main():
-    print("Welcome to the Brain Games!\n")
-    name = input("May I have your name? ")
-    print(f"Hello, {name}!\n")
-
-    game_choice = choose_game()
+def run_game(name, get_question_and_answer):
     print()
+    rounds = 3
 
-    if game_choice == 1:
-        play_first_game(name)
-    elif game_choice == 2:
-        play_second_game(name)
+    for _ in range(rounds):
+        question, correct_answer = get_question_and_answer()
 
+        print(f"Question: {question}")
+        user_answer = input("Your answer: ")
 
-if __name__ == "__main__":
-    main()
+        if user_answer == str(correct_answer):
+            print("Correct!\n")
+        else:
+            print(
+                f"'{user_answer}' is wrong answer ;(. "
+                f"Correct answer was '{correct_answer}'."
+            )
+            print(f"Let's try again, {name}!\n")
+            return
+
+    print(f"Congratulations, {name}!\n")
